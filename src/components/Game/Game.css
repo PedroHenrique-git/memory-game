@@ -1,6 +1,6 @@
 .game-container {
     margin: 100px auto;
-    max-width: 1200px;
+    max-width: 1920px;
 
     display: flex;
     flex-direction: column;
@@ -57,5 +57,14 @@
 }
 
 .block-element {
+    pointer-events: none;
+}
+
+.found-pair { 
+    opacity: .8;
+    cursor: not-allowed !important;
+}
+
+.block-click {
     pointer-events: none;
 }
