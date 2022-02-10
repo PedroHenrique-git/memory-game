@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { toast } from 'react-toastify';
+import Toastify from 'toastify-js';
 import { v4 as uuid } from 'uuid';
 import generateRandomEmoji from '../../utils/generateRandomEmoji';
 import { generateRandomNumber } from '../../utils/generateRandomNumber';
@@ -68,13 +68,18 @@ const Game = ({ minGame, maxGame, timeToShowImage }: GameProps) => {
       }
     }
 
-    const win = showImages.every((v) => v);
+    const win = showImages.every((v) => v === true);
     win &&
-      toast('Congratulations! you won', {
-        theme: 'light',
-        type: 'success',
-        style: { fontSize: '1.8rem' },
-      });
+      Toastify({
+        text: 'Congratulations! you won',
+        duration: 4500,
+        newWindow: true,
+        gravity: 'top',
+        position: 'right',
+        style: {
+          fontSize: '1.8rem',
+        },
+      }).showToast();
   }, [selectedCards, showImages, cards, timeToShowImage]);
 
   return (
