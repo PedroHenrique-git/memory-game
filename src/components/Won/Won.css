@@ -1,0 +1,15 @@
+.won-container {
+    max-width: 450px;
+    margin: 100px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    flex-direction: column;
+}
+
+.won-container h1 {
+    font-size: 3rem;
+    text-align: center;
+}

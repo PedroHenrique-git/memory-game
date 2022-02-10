@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'preact/hooks';
-import Toastify from 'toastify-js';
 import { v4 as uuid } from 'uuid';
 import generateRandomEmoji from '../../utils/generateRandomEmoji';
 import { generateRandomNumber } from '../../utils/generateRandomNumber';
 import shuffleArray from '../../utils/shuffleArray';
+import Won from '../Won/Won';
 import './Game.css';
 
 type Card = {
@@ -24,6 +24,7 @@ const Game = ({ minGame, maxGame, timeToShowImage }: GameProps) => {
   );
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
   const [showImages, setShowImages] = useState<boolean[]>([]);
+  const [won, setWon] = useState(false);
 
   const handleClickCard = (index: number, card: Card) => {
     const newShowImages = showImages.map((v, i) => (i === index ? !v : v));
@@ -68,19 +69,16 @@ const Game = ({ minGame, maxGame, timeToShowImage }: GameProps) => {
       }
     }
 
-    const win = showImages.every((v) => v === true);
-    win &&
-      Toastify({
-        text: 'Congratulations! you won',
-        duration: 4500,
-        newWindow: true,
-        gravity: 'top',
-        position: 'right',
-        style: {
-          fontSize: '1.8rem',
-        },
-      }).showToast();
+    setWon(() => showImages.every((v) => v === true));
   }, [selectedCards, showImages, cards, timeToShowImage]);
+
+  if (won) {
+    return (
+      <Won
+        onClick={() => setDifficult(generateRandomNumber(minGame, maxGame))}
+      />
+    );
+  }
 
   return (
     <section className="game-container">

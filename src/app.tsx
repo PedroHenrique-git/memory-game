@@ -1,4 +1,3 @@
-import 'toastify-js/src/toastify.css';
 import Game from './components/Game/Game';
 
 const App = () => {
